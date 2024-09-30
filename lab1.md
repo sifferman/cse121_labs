@@ -13,6 +13,12 @@ in the Pi4.
 It is VERY important to submit the report.pdf.
 If this file is missing, you lose 1/2 of the points.
 
+## Lab1.0: Acquire CSE121 Kit (0 points)
+
+You must collect a cse121 kit from BELS' office in JBE-40 (in the basement).
+It is yours to borrow for the quarter, then return after finishing the last lab.
+If you are missing any parts when you return it, you will have to pay.
+
 ## Lab1.1: setup Pi4 (10 points)
 
 Lab1.1 requires you to assemble the components leading to getting

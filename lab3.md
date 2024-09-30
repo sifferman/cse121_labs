@@ -11,12 +11,15 @@ file is missing, you lose 1⁄2 of the points.
 
 ## Lab3.1: Solder pins (5 points)
 
-Go to bells and pick the new pin header. This task aims to solder the header so that you can do
-the I2C and Vdd control for the display.
+You must solder the pin headers to the ESP32 board. This for the I2C and Vdd
+control for the display.
 
 ## Lab3.2: Display library (10 points)
 
-You can clone the <https://github.com/DFRobotdl/DFRobot_LCD>. This library was for Arduino, but we have an ESP32C3, so it does not work. The idea is to respect the same API (DFRobot_LCD.h) but to completely rework the internals (only use ESP32 calls like we have been doing during class). Some hints:
+You can clone the <https://github.com/DFRobotdl/DFRobot_LCD>. This library was
+for Arduino, but we have an ESP32C3, so it does not work. The idea is to
+respect the same API (DFRobot_LCD.h) but to completely rework the internals
+(only use ESP32 calls like we have been doing during class). Some hints:
 
 * This is a C++ library, so the ESP32 project should be C++.
 * The Print should be removed.
