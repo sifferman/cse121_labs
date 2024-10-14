@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Set Up ESP-IDF
+export IDF_PATH=/esp/esp-idf
+. /esp/esp-idf/export.sh
+
+# Install python requirements in ESP-IDF venv
+pip3 install -r /autograder/source/autograder_requirements.txt
+
+# export results
+cd /autograder/source/generate_results
+python3 generate_results.py > /autograder/results/results.json
+cat /autograder/results/results.json

@@ -1,0 +1,38 @@
+
+import unittest
+import subprocess
+from timeout import TimeoutTimer
+from gradescope_utils.autograder_utils.decorators import weight
+
+class TestProvided(unittest.TestCase):
+
+    longMessage = False
+
+    def setUp(self):
+        pass
+
+    def run_command(self, command):
+        # Execute the command and capture its output and return code
+        with TimeoutTimer(2):
+            process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        output, error = process.communicate()
+        return_code = process.returncode
+
+        print(output.decode('utf-8'))
+
+        if return_code == 0:
+            self.assertTrue(True, "Build executed successfully.")
+        else:
+            error_message = f"Build failed with return code {return_code}.\n{error.decode('utf-8')}"
+            self.fail(error_message)
+
+    def build_project_in_dir(self, dir):
+        command = f'''
+                  cd \"{dir}\" && \
+                  rm -rf build && \
+                  idf.py set-target esp32c3 && \
+                  idf.py build
+                  '''
+        self.run_command(command)
+
+    # tests will be inserted here

@@ -1,2 +1,4 @@
 *.elf binary
 *.png binary
+
+*.py.* linguist-language=Python

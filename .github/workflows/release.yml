@@ -1,0 +1,29 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: write
+jobs:
+  Release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Create Tag
+        run: |
+          echo "TAG_NAME=$(date +%Y.%m.%d.%H.%M)" >> "$GITHUB_ENV"
+          git tag ${{ env.TAG_NAME }}
+          git push origin ${{ env.TAG_NAME }}
+      - name: Generate Autograder
+        run: |
+          make -C autograder build/autograder_lab1.zip
+          mv autograder/build/autograder_lab1.zip autograder_lab1_${{ env.TAG_NAME }}.zip
+      - uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: True
+          omitBody: True
+          tag: ${{ env.TAG_NAME }}
+          artifacts: |
+            autograder_lab1_${{ env.TAG_NAME }}.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
