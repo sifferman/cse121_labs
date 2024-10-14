@@ -13,7 +13,7 @@ file is missing, you lose 1⁄2 of the points.
 ## Lab2.1: print value with GDB (10 points)
 
 This repo has a "lab2/lab2_debug.elf" file. You
-should upload it to the ESP32 board and run GDB with it.
+should convert it to a .bin, then upload it to the ESP32 board, then run GDB with it.
 
 Some things that you will need to "figure out".
 
