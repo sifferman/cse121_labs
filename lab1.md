@@ -246,14 +246,16 @@ should have different directories (lab1_2 and lab1_3). For
 example, these are the lab files and directories for my lab1.3.
 
 * report.pdf
-* lab1_3/
+* lab1_2/sdkconfig
+* lab1_2/CMakeLists.txt
+* lab1_2/README.md
+* lab1_2/main/CMakeLists.txt
+* lab1_2/main/main.c
 * lab1_3/sdkconfig
 * lab1_3/CMakeLists.txt
-* lab1_3//README.md
-* lab1_3/main
+* lab1_3/README.md
 * lab1_3/main/CMakeLists.txt
 * lab1_3/main/main.c
-* lab1_2/.... More files here
 
 The README.md documents should include any issues (like what is not working)
 that you may have.  If everything works, just write "everything works"
