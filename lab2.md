@@ -15,6 +15,12 @@ file is missing, you lose 1⁄2 of the points.
 This repo has a "lab2/lab2_debug.elf" file. You
 should convert it to a .bin, then upload it to the ESP32 board, then run GDB with it.
 
+You can see the full dissasembly of "lab2/lab2_debug.elf" with the following command:
+
+```bash
+riscv64-unknown-elf-objdump -D lab2/lab2_image.elf > lab2_image.S
+```
+
 Some things that you will need to "figure out".
 
 * How can I upload an image obtained from someone else (where I do not have the
@@ -32,9 +38,9 @@ command not only tries to flash your program, it also tries to build a new
 lab2_debug.elf for you, potentially wiping out your previous one.
 
 What you have to do is to demonstrate during check-off time in the lab that you
-are able to run gdb so as to obtain what the values passed to the "compute"
+are able to run gdb so as to obtain what the values passed to the `compute`
 function (there are 3 values passed to this function, and one value returned).
-You will also have to show the entry point address of the compute function, and
+You will also have to show the entry point address of the `compute` function, and
 the address of the instruction within that function that returns a value.
 
 When the binary runs, it prints something like this (XXX value may change
@@ -104,7 +110,7 @@ Gdb also has an excellent help system.
 The answer should be written in the report.pdf. It should be something like:
 (note these values are wrong). Explain from how you got the answer (justify the
 answer, do not just write the correct value).  You will need to be able to show
-how the 3 parameters are passed to the "compute" function, and how its value
+how the 3 parameters are passed to the `compute` function, and how its value
 gets returned, and how you got the address of the requested items.
 
 
@@ -126,7 +132,7 @@ Some suggestions to get GDB working:
 * The breakpoint command "b app_main", may not work with the new binary (different address maps)
   * Check the address location (riscv32-esp-elf-objdump -S binary.elf should help)
   * Create binary address checkpoint like b *0x4200bbcc" (or the correct address)
-* Run usual gdb command and check the register values before starting to execute "compute"
+* Run usual gdb command and check the register values before starting to execute `compute`
 
 ## Lab2.2: humidity and temperature (10 points)
 
