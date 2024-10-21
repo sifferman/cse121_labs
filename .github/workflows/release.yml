@@ -19,6 +19,8 @@ jobs:
         run: |
           make -C autograder build/autograder_lab1.zip
           mv autograder/build/autograder_lab1.zip autograder_lab1_${{ env.TAG_NAME }}.zip
+          make -C autograder build/autograder_lab2.zip
+          mv autograder/build/autograder_lab2.zip autograder_lab2_${{ env.TAG_NAME }}.zip
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: True
@@ -26,4 +28,5 @@ jobs:
           tag: ${{ env.TAG_NAME }}
           artifacts: |
             autograder_lab1_${{ env.TAG_NAME }}.zip
+            autograder_lab2_${{ env.TAG_NAME }}.zip
           token: ${{ secrets.GITHUB_TOKEN }}

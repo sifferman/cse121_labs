@@ -1,5 +1,5 @@
 
-all: clean build/autograder_lab1.zip
+all: clean build/autograder_lab1.zip build/autograder_lab2.zip
 
 build/autograder_%.zip:
 	rm -rf $@ build/$*

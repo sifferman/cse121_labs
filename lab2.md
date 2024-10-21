@@ -160,3 +160,12 @@ Some special requirements:
 
 Same instructions as lab1. Upload the zip with the code but without the build
 subdirectory and a report.pdf to Gradescope.
+
+Submit the following code files:
+
+* lab2_2/sdkconfig
+* lab2_2/CMakeLists.txt
+* lab2_2/README.md
+* lab2_2/main/CMakeLists.txt
+* lab2_2/main/*.c
+* lab2_2/main/*.h
