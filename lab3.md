@@ -51,3 +51,8 @@ Using the display, read the humidity sensor and the temperature. It should show 
 
 Same instructions as lab1. Upload the zip with the code but without the build
 subdirectory and a report.pdf to Gradescope.
+
+Submit the following directories:
+
+* lab3_2/*
+* lab3_3/*

@@ -61,3 +61,9 @@ each additional.
 ## What/How to submit
 
 Same instructions as lab1. Upload the zip with the code and report.pdf to Gradescope.
+
+Submit the following directories:
+
+* lab4_1/*
+* lab4_2/*
+* lab4_3/*

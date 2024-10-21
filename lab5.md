@@ -9,7 +9,7 @@ ESP32 board.
 
 Connect the PI4 with an LED.
 
-WARNING: If you miss the resistor, the LED may burn.
+WARNING: If you miss the resistor, the LED may burn out.
 
 The resistor limits the current to the LED when emitting light. This means that
 the lower the resistor, the higher the current. If no resistor is used, it can
@@ -64,9 +64,15 @@ in characters per second.
 
 The 5 labs submitted on time with the fastest transmission rate in the class
 will get extra credit (1st 10 points, 2nd 8 points, 3rd 6 points, 4th 4
-points,5th 2 points).
+points, 5th 2 points).
 
 ## What/How to submit
 
 Same instructions as lab1. Upload the zip with the code and report.pdf to
 Gradescope.
+
+Submit the following files and directories:
+
+* lab5_1/send
+* lab5_2/*
+* lab5_3/*

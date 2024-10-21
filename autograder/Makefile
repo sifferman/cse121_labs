@@ -1,5 +1,11 @@
 
-all: clean build/autograder_lab1.zip build/autograder_lab2.zip
+AUTOGRADERS := build/autograder_lab1.zip \
+               build/autograder_lab2.zip \
+               build/autograder_lab3.zip \
+               build/autograder_lab4.zip \
+               build/autograder_lab5.zip
+
+all: clean ${AUTOGRADERS}
 
 build/autograder_%.zip:
 	rm -rf $@ build/$*

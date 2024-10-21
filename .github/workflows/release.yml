@@ -17,10 +17,12 @@ jobs:
           git push origin ${{ env.TAG_NAME }}
       - name: Generate Autograder
         run: |
-          make -C autograder build/autograder_lab1.zip
+          make -C autograder
           mv autograder/build/autograder_lab1.zip autograder_lab1_${{ env.TAG_NAME }}.zip
-          make -C autograder build/autograder_lab2.zip
           mv autograder/build/autograder_lab2.zip autograder_lab2_${{ env.TAG_NAME }}.zip
+          mv autograder/build/autograder_lab3.zip autograder_lab3_${{ env.TAG_NAME }}.zip
+          mv autograder/build/autograder_lab4.zip autograder_lab4_${{ env.TAG_NAME }}.zip
+          mv autograder/build/autograder_lab5.zip autograder_lab5_${{ env.TAG_NAME }}.zip
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: True
@@ -29,4 +31,7 @@ jobs:
           artifacts: |
             autograder_lab1_${{ env.TAG_NAME }}.zip
             autograder_lab2_${{ env.TAG_NAME }}.zip
+            autograder_lab3_${{ env.TAG_NAME }}.zip
+            autograder_lab4_${{ env.TAG_NAME }}.zip
+            autograder_lab5_${{ env.TAG_NAME }}.zip
           token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,12 @@
+
+    @weight(1)
+    def test_build_lab5_1(self):
+        self.run_command('[ -f /autograder/submission/lab5_1/send ] || exit 1')
+
+    @weight(1)
+    def test_build_lab5_2(self):
+        self.build_project_in_dir('/autograder/submission/lab5_2')
+
+    @weight(1)
+    def test_build_lab5_3(self):
+        self.build_project_in_dir('/autograder/submission/lab5_3')
