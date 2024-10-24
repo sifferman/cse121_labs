@@ -16,7 +16,7 @@ control for the display.
 
 ## Lab3.2: Display library (10 points)
 
-You can clone the <https://github.com/DFRobotdl/DFRobot_LCD>. This library was
+You can clone the <https://github.com/DFRobot/DFRobot_RGBLCD1602>. This library was
 for Arduino, but we have an ESP32C3, so it does not work. The idea is to
 respect the same API (DFRobot_LCD.h) but to completely rework the internals
 (only use ESP32 calls like we have been doing during class). Some hints:
