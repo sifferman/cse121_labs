@@ -1,7 +1,10 @@
 
     @weight(1)
     def test_build_lab5_1(self):
-        self.run_command('[ -f /autograder/submission/lab5_1/send ] || exit 1')
+        command = (
+            '[ -f /autograder/submission/lab5_1/send ] || { echo "Error: \'lab5_1/send\' does not exist" >&2; exit 1; };'
+        )
+        self.run_command(command)
 
     @weight(1)
     def test_build_lab5_2(self):
