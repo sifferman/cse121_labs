@@ -17,13 +17,15 @@ This is mostly to reproduce the wttr.in example from class. Check the
 SSID/Password and certificate expiration like in class.
 
 ### OPTION 1: PI
- Similar to class, but you need to setup the PI as a hotspot server. This is
- easier if you connect to ethernet (RJ-45) for internet, and use wifi for
- hotspot.
+
+Similar to class, but you need to setup the PI as a hotspot server. This is
+easier if you connect to ethernet (RJ-45) for internet, and use wifi for
+hotspot.
 
 ### OPTION 2: Phone
- In this case, the setup is the same as in the class. But if you pick option 2,
- you must also do option 2 (phone) in parts 7.2 and 7.3
+
+In this case, the setup is the same as in the class. But if you pick option 2,
+you must also do option 2 (phone) in parts 7.2 and 7.3
 
 Get only the temperature from wttr.in in celcius.
 
@@ -31,7 +33,7 @@ Get only the temperature from wttr.in in celcius.
 https://wttr.in/:help
 ```
 
-Check https://github.com/chubin/wttr.in for more options
+Check <https://github.com/chubin/wttr.in> for more options
 
 ## Lab7.2: Post results (5 points)
 
@@ -52,7 +54,7 @@ post temperature+humidity and check the location.
 To check the location, this command should run in your PI/Phone (SOME_IP depends on your device)
 
 ```
-      wget http://SOME_IP/location
+wget http://SOME_IP/location
 ```
 
 The ESP32 should query the wttr.in with the indicated location, and combine the
@@ -62,5 +64,11 @@ the location, wttr.in temperature, and local temperature.
 
 ## What/How to submit
 
-Same instructions as lab1. Upload the **zip** with the **code**
-and **report.pdf** to Gradescope.
+Same instructions as lab1. Upload the zip with the code and report.pdf to
+Gradescope.
+
+Submit the following files and directories:
+
+* lab7_1/*
+* lab7_2/*
+* lab7_3/*
