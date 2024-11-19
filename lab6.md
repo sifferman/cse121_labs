@@ -33,3 +33,7 @@ precision.
 
 Same instructions as lab1. Upload the zip with the code and report.pdf to
 Gradescope.
+
+Submit the following files and directories:
+
+* lab6_1/*
