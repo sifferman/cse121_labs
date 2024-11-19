@@ -3,7 +3,8 @@ AUTOGRADERS := build/autograder_lab1.zip \
                build/autograder_lab2.zip \
                build/autograder_lab3.zip \
                build/autograder_lab4.zip \
-               build/autograder_lab5.zip
+               build/autograder_lab5.zip \
+               build/autograder_lab6.zip
 
 all: clean ${AUTOGRADERS}
 
