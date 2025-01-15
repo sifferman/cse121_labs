@@ -11,6 +11,8 @@ about the configured location in the weather station.
 It is VERY important to submit the **report.pdf**. If this file is missing, you
 lose 1⁄2 of the points.
 
+You may want to watch this video to help you get started: <https://youtu.be/GIbA3fHAHxY>.
+
 ## Lab7.1: Get the weather (5 points)
 
 This is mostly to reproduce the wttr.in example from class. Check the
