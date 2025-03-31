@@ -2,7 +2,7 @@ name: Release
 on:
   push:
     branches:
-      - main
+      - s25
 permissions:
   contents: write
 jobs:

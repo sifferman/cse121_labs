@@ -1,6 +1,6 @@
 # Lab 6 - Ultrasonic Range Finder
 
-Due Date: Wed 11/27/2024
+Due Date: Wed 5/23/2025
 
 This lab is to program the ultrasonic range.
 

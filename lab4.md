@@ -1,6 +1,6 @@
 # Lab 4 - Create a BlueTooth Mouse
 
-Due Date: Tues 11/12/2024
+Due Date: Tues 5/2/2025
 
 This lab is worth 20 Points. The overall objective of this task is to use the
 ICM-42670-P on the RUST ESP32C3 board as a Bluetooth mouse.  Each time the

@@ -8,6 +8,5 @@
 * [Lab 5](./lab5.md)
 * [Lab 6](./lab6.md)
 * [Lab 7](./lab7.md)
-* [Lab 8](./lab8.md)
 
-Created by Jose Renau
+Created by Jose Renau, adapted by Ethan Sifferman

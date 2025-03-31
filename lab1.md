@@ -1,6 +1,6 @@
 # Lab 1 - Lab Setup and trivial tests
 
-Due Date: Tues 10/15/2024
+Due Date: Tues 4/11/2025
 
 This lab is worth 20 Points. Project check-off takes
 place during the TA section.
@@ -43,13 +43,13 @@ which adds extra user friendly functionality.
    that we can flash the Operating System into the Pi4 microSD.
    Details for downloading Pi Imager for various computer
    platforms (Mac, Windows or Linux) can be found here:
-      https://www.raspberrypi.com/software/
+      <https://www.raspberrypi.com/software/>
 
 3. In order to flash the microSD insert it into the CanaKit
    "USB MicroSD Card Reader" device.
 
 4. Download the UBUNTU 64-bit server image (not the default one)
-   (https://ubuntu.com/download/raspberry-pi)
+   (<https://ubuntu.com/download/raspberry-pi>)
 
 5. Insert MicroSD Card Reader into a USB Port in the computer.
    Start the raspberry-pi imager in order to Flash the microSD
@@ -65,8 +65,10 @@ which adds extra user friendly functionality.
    Power on the device, and allow it to boot. Then type this
    to login (unless you changed user name and passwd in the settings):
 
+   ```
    login: ubuntu
    password: ubuntu
+   ```
 
    NOTE: if you might also be able a serial port to connect to the
    PI4 UART and a terminal for this part of the setup,
@@ -76,7 +78,9 @@ which adds extra user friendly functionality.
    as for directories, you may want to add a file in your home
    direcory called .dircolors with an entry such as:
 
-      DIR 01;36 # teal color for directories
+   ```bash
+   DIR 01;36 # teal color for directories
+   ```
 
    After you start a new shell you might see color changes when you
    do `ls`.  If you want to change other colors, read more about
@@ -91,7 +95,7 @@ which adds extra user friendly functionality.
    OR (option 2) use a non-eduroam way to connect with WiFi.
 
    Option 2: (not using school eduroam, but home wireless) See:
-   > https://linuxconfig.org/ubuntu-20-04-connect-to-wifi-from-command-line
+   > <https://linuxconfig.org/ubuntu-20-04-connect-to-wifi-from-command-line>
 
    Option 3: Use an ethernet cable connected to your router at home or
    configure the Pi4 to use your own WiFi.
@@ -261,7 +265,7 @@ The README.md documents should include any issues (like what is not working)
 that you may have.  If everything works, just write "everything works"
 inside the README.md.
 
-There should also be a SINGLE PDF file named report.pdf that includes:
+There should also be a SINGLE PDF file named `"report.pdf"` that includes:
 
 * Any question/answer to GPT or equivalent LLM that you used
   + Include the PDF of the chat + the "Share"

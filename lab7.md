@@ -1,6 +1,6 @@
 # Lab 7 - Weather Station
 
-Due Date: Wed 12/4/2024
+Due Date: Wed 5/30/2025
 
 This lab is worth 20 Points. The overall objective of this task is to use the
 ESP32 as a weather station that post results in a Raspberry PI server.
