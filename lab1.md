@@ -1,6 +1,6 @@
 # Lab 1 - Lab Setup and trivial tests
 
-Due Date: Tues 4/11/2025
+Due Date: Friday 4/11/2025
 
 This lab is worth 20 Points. Project check-off takes
 place during the TA section.
@@ -48,13 +48,16 @@ which adds extra user friendly functionality.
 3. In order to flash the microSD insert it into the CanaKit
    "USB MicroSD Card Reader" device.
 
-4. Under "Other general-purpose OS", select "Ubuntu" and then select the latest 64-bit Ubuntu Server image. (24.04 and 24.10 are both okay)
+4. Under "Other general-purpose OS", select "Ubuntu" and then select
+   the latest 64-bit Ubuntu Server image. (24.04 and 24.10 are both okay)
    (<https://ubuntu.com/download/raspberry-pi>)
 
 5. Insert MicroSD Card Reader into a USB Port in the computer.
    Start the raspberry-pi imager in order to Flash the microSD
-   
-   Absolutely make sure that you are selecting the proper drive to format by unplugging and plugging the MicroSD Card Reader back in to see which drive disappears and reappears.
+
+   [!Warning] **Beware**: Make sure that you are selecting the proper drive
+   to format by unplugging and plugging the MicroSD Card Reader back in to
+   see which drive disappears and reappears.
 
 6. Extract the microSD from the USB MicroSD Card Reader and
    insert it back into the Pi4 box microSD slot.
@@ -71,50 +74,37 @@ which adds extra user friendly functionality.
    PI4 UART and a terminal for this part of the setup,
    but we reccommend use of a monitor with an HDMI interface.
 
-7. If you do an `ls` and find that some colors are unreadable on your monitor, type 
+7. If you do an `ls` and find that some colors are unreadable on your monitor,
+   then you can temporarily change the `ls` dir colors with the following command:
 
+   ```bash
+   export LS_COLORS=$LS_COLORS:'di=0;36:'
    ```
-   vim ~/.bashrc
-   ```
 
-   Quick vim tutorial:
-
-1.  _Calling vim on a nonexisting file creates a new file at that location._&nbsp;
-2.  _To move your cursor to the last character press "shift" + "g"._
-3.  _To modify the file, press "i", and adjust cursor using the arrow keys._
-4.  _To finish modifying press "Esc"._
-5.  _To finish editing, press "shift" + ":", and the console will appear at the bottom of the screen._
-6.  _Type "wq" into the terminal to write (save) and quit_
-    1.  _If you want to quit without saving type "q!"_
-
-   Then press i to enter the following lines at the bottom of the file
-
-   ```
-   LS_COLORS=$LS_COLORS:'di=0;36:' ;
-   export LS_COLORS
-   ```
    The number 36 corresponds to teal. Check here to see all formatting options.
    > <https://askubuntu.com/questions/466198/how-do-i-change-the-color-for-directories-with-ls-in-the-console>
 
-   Press "esc", then ":", and type "wq", and "enter" to save the file.
+   To make this color change permanent, you may add this line to your `"~/.bashrc"` file.
 
-   Finally to push the change type
-
-   ```bash
-   source ~/.bashrc
+   ```
+   # To open your ~/.bashrc file in vim:
+   vim ~/.bashrc
    ```
 
-8. Setup Preliminary Wifi
+   Observe the following "Getting-Started" guide for vim:
+   > <https://github.com/sifferman/cse121_labs/blob/HEAD/vim_getting_started.md>
 
-   Getting the pi online through eduroam will be necessary for completing lab 1.1, but for now, any of the following methods should work for completing setup.
-   
-   If you are in lab:
-   Temporarily plug your pi into the ethernet and move onto step 8.
+8. Setup Preliminary Internet Access
 
-   If you are at home follow this tutorial to connect to your home wifi.
+   Getting the pi online through eduroam will be necessary for completing lab 1.1,
+   but for now, any of the following methods should work for completing setup.
+
+   If you are in lab, temporarily plug your pi into the ethernet and move onto step 8.
+
+   If you are at home, follow this tutorial to connect to your home wifi.
    > <https://linuxconfig.org/ubuntu-20-04-connect-to-wifi-from-command-line>
 
-   
+
 9. Upgrade ubuntu and install required packages
 
    ```bash
@@ -122,126 +112,153 @@ which adds extra user friendly functionality.
    sudo apt upgrade
    ```
 
-10.  Install XFCE window manager.
+## Lab1.1.2: Install XFCE window manager
 
-   This will install a desktop interface like any other computer and is more convenient than just the command line interface (CLI) alone
+1. This will install a desktop interface like any other computer and
+   is more convenient than the command line interface (CLI)
 
    Type the following to install the necessary packages:
 
    ```bash
    sudo apt install xfce4 xinit firefox
    ```
-   Then reboot your pi to let the changes take effect. You can unplug your pi and plug back in, or simply type
+
+   Then reboot your pi to let the changes take effect. You can
+   unplug your pi and plug back in, or simply type
 
    ```bash
    sudo reboot
    ```
-   If you are able to log in, continue to step 11.
 
-   
+   If you are able to login, continue to step 11.
+
    press ctrl + alt + F1, (cmd + alt + F1 for Mac).
 
-1. Along with xfce4, install the following
-```
-sudo apt-get install lightdm  
-sudo apt-get install ubuntu-session 
-```
+2. Along with xfce4, install the following
+   ```
+   sudo apt-get install lightdm
+   sudo apt-get install ubuntu-session
+   ```
 
 When installing lightdm, a pink screen will pop up, Select gdm3 instead of lightdm.
 
-2. Add your user to the "tty" group using this command replacing username with whatever you picked 
-```
-sudo usermod -a -G tty username
-```
-The usermod APPENDS the tty GROUP to your user account, giving you permission to access&nbsp;your pi4's ports and virtual terminal sessions._
+3. Add your user to the "tty" group using this command replacing username with whatever you picked
+   ```
+   sudo usermod -a -G tty username
+   ```
+   The usermod APPENDS the tty GROUP to your user account, giving you permission to access&nbsp;your pi4's ports and virtual terminal sessions._
 
-If you'd like to learn more about tty click [here](https://www.linusakesson.net/programming/tty/index.php?ref=itsfoss.com)! Basically here its giving us the ability to troubleshoot without the need of a graphical interface._
+   If you'd like to learn more about tty click [here](https://www.linusakesson.net/programming/tty/index.php?ref=itsfoss.com)! Basically here its giving us the ability to troubleshoot without the need of a graphical interface._
 
 3. Create the file "Xwrapper.config" using the following command.
 
-```
-sudo vim /etc/X11/Xwrapper.config
-```
-/etc is where all app config files are stored_  
+   ```
+   sudo vim /etc/X11/Xwrapper.config
+   ```
+
+   /etc is where all app config files are stored_
+
 4. Insert these lines (case sensitive) in the "Xwrapper.config" file:
-```
-allowed_users=anybody  
-needs_root_rights=yes
-```
-Click [here](https://man.archlinux.org/man/extra/xorg-server/Xwrapper.config.5.en) if you're interested in what these parameters represent._  
+
+   ```
+   allowed_users=anybody
+   needs_root_rights=yes
+   ```
+
+   Click [here](https://man.archlinux.org/man/extra/xorg-server/Xwrapper.config.5.en) if you're interested in what these parameters represent._
+
 5. . Create the file "lightdm.conf" using the following command.
-```
-sudo vim /etc/lightdm/lightdm.conf  
-```
+
+   ```
+   sudo vim /etc/lightdm/lightdm.conf
+   ```
+
 6. . Add the following lines in the "lightdm.conf" file (the allow-guest line is optional):
-```
-[SeatDefaults]  
-allow-guest=false  
-user-session=xfce  
-```
-7. . Rebooting using the following command should successfully launch the desktop:  
-```
-sudo reboot
-```
+
+   ```
+   [SeatDefaults]
+   allow-guest=false
+   user-session=xfce
+   ```
+
+7. . Rebooting using the following command should successfully launch the desktop:
+
+   ```
+   sudo reboot
+   ```
 
 11. Connect/setup to eduroam (AND INCLUDE IT in report.pdf)
 
-Once you're on your desktop, connecting to eduroam is as easy as navigating to the network settings, selecting eduroam as your network, and then signing on using your cruz ID and gold password as you would for any other device.
+   Once you're on your desktop, connecting to eduroam is as easy as navigating to the network settings, selecting eduroam as your network, and then signing on using your cruz ID and gold password as you would for any other device.
 
-If your settings show "No wifi adapter detected" or does not connect for any other reason, locate the white flashdrive containing eduroam.zip and run the install script using the following steps:
+   If your settings show "No wifi adapter detected" or does not connect for any other reason, locate the white flashdrive containing eduroam.zip and run the install script using the following steps:
 
 1. Install network Manager
-```
-sudo apt install network-manager unzip
-```
-You'll need unzip package later to unzip eduroam.zip contained in the flash drive.
+
+   ```
+   sudo apt install network-manager unzip
+   ```
+
+   You'll need unzip package later to unzip eduroam.zip contained in the flash drive.
 
 2. Prior to plugging in usb stick run
-```
-lsblk
-```
-This will **display details about block devices** so you can tell which one the flash drive is after plugging it in.
+
+   ```
+   lsblk
+   ```
+
+   This will **display details about block devices** so you can tell which one the flash drive is after plugging it in.
 
 3. Plug in the usb stick and run:
-```
-lsblk
-```
-Identify the new device most likely it'll be **/dev/sda1**
+
+   ```
+   lsblk
+   ```
+
+   Identify the new device most likely it'll be **/dev/sda1**
 
 4. Make a directory which the usb will be mounted to and mount it:
-```
-mkdir ~/usb_stick
-sudo mount /dev/sda1 ~/usb_stick
-```
-**/dev/sda1** might be different for you
+
+   ```
+   mkdir ~/usb_stick
+   sudo mount /dev/sda1 ~/usb_stick
+   ```
+
+   **/dev/sda1** might be different for you
 
 5. Copy the content of the flash drive to you home directory
-```
-cp -r  ~/usb_stick/eduroam.zip ~/.
-or 
-cp -r  ~/usb_stick/eduroam ~/.
 
-```
+   ```
+   cp -r  ~/usb_stick/eduroam.zip ~/.
+   or
+   cp -r  ~/usb_stick/eduroam ~/.
+   ```
+
 6. Unmount the flash drive and remove it:
-```
-sudo umount /dev/sda1
-```
-**/dev/sda1** might be different for you
+
+   ```
+   sudo umount /dev/sda1
+   ```
+
+   **/dev/sda1** might be different for you
 
 7. unzip eduroam.zip and run the eduroam/setup.sh
-```
-unzip eduroam.zip 
-cd ~/eduroam
-sudo ./setup.sh
-```
-You might need to chmod +x the script.
+
+   ```
+   unzip eduroam.zip
+   cd ~/eduroam
+   sudo ./setup.sh
+   ```
+
+   You might need to chmod +x the script.
 
 8. Input your Gold password info when prompted, and you should be connected. Remove you're ethernet and try pinging google.
-```
-email: blank@ucsc.edu
-username: blank@ucsc.edu
-password: [Gold password]
-```
+
+   ```
+   email: blank@ucsc.edu
+   username: blank@ucsc.edu
+   password: [Gold password]
+   ```
 
 ## Lab1.2: Run hello world in ESP32 (5 points)
 
@@ -373,4 +390,3 @@ There should also be a SINGLE PDF file named `"report.pdf"` that includes:
   + **You CANNOT share** your query searches. Part of the
     class is to learn how to look/find information.
     - If you share, it is also considered cheating.
-
