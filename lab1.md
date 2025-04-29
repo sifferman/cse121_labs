@@ -48,18 +48,18 @@ which adds extra user friendly functionality.
 3. In order to flash the microSD insert it into the CanaKit
    "USB MicroSD Card Reader" device.
 
-4. Download the UBUNTU 64-bit server image (not the default one)
+4. Under "Other general-purpose OS", select "Ubuntu" and then select
+   the latest 64-bit Ubuntu Server image. (24.04 and 24.10 are both okay)
    (<https://ubuntu.com/download/raspberry-pi>)
 
 5. Insert MicroSD Card Reader into a USB Port in the computer.
    Start the raspberry-pi imager in order to Flash the microSD
-   BEWARE!! Be very careful that you choose the right destination
-   (e.g. the correct 128GB USB based storage) and not any other
-   drive in your computer, or you will be EXTREMELY sorry you
-   did not heed  this advice!  Click on the gear and do your best
-   with the settings for installing the software.
 
-5. Extract the microSD from the USB MicroSD Card Reader and
+   [!Warning] **Beware**: Make sure that you are selecting the proper drive
+   to format by unplugging and plugging the MicroSD Card Reader back in to
+   see which drive disappears and reappears.
+
+6. Extract the microSD from the USB MicroSD Card Reader and
    insert it back into the Pi4 box microSD slot.
    Connect cables for keyboard, monitor, and mouse.
    Power on the device, and allow it to boot. Then type this
@@ -74,84 +74,190 @@ which adds extra user friendly functionality.
    PI4 UART and a terminal for this part of the setup,
    but we reccommend use of a monitor with an HDMI interface.
 
-6. If you do an `ls` and find that some colors are unreadable, such
-   as for directories, you may want to add a file in your home
-   direcory called .dircolors with an entry such as:
+7. If you do an `ls` and find that some colors are unreadable on your monitor,
+   then you can temporarily change the `ls` dir colors with the following command:
 
    ```bash
-   DIR 01;36 # teal color for directories
+   export LS_COLORS=$LS_COLORS:'di=0;36:'
    ```
 
-   After you start a new shell you might see color changes when you
-   do `ls`.  If you want to change other colors, read more about
-   LSCOLORS and dircolors.
+   The number 36 corresponds to teal. Check here to see all formatting options.
+   > <https://askubuntu.com/questions/466198/how-do-i-change-the-color-for-directories-with-ls-in-the-console>
 
-7. Setup Wifi
+   To make this color change permanent, you may add this line to your `"~/.bashrc"` file.
 
-   This is a bit trickier because the default ubuntu server does
-   not install the required commands to run eduroam.
+   ```
+   # To open your ~/.bashrc file in vim:
+   vim ~/.bashrc
+   ```
 
-   Therefore you must either (option 1) connect to the ethernet port
-   OR (option 2) use a non-eduroam way to connect with WiFi.
+   Observe the following "Getting-Started" guide for vim:
+   > <https://github.com/sifferman/cse121_labs/blob/HEAD/vim_getting_started.md>
 
-   Option 2: (not using school eduroam, but home wireless) See:
+8. Setup Preliminary Internet Access
+
+   Getting the pi online through eduroam will be necessary for completing lab 1.1,
+   but for now, any of the following methods should work for completing setup.
+
+   If you are in lab, temporarily plug your pi into the ethernet and move onto step 8.
+
+   If you are at home, follow this tutorial to connect to your home wifi.
    > <https://linuxconfig.org/ubuntu-20-04-connect-to-wifi-from-command-line>
 
-   Option 3: Use an ethernet cable connected to your router at home or
-   configure the Pi4 to use your own WiFi.
 
-   Option 4: Use a phone hotspot.
-
-   You will need Eudoroam to access the Internet in our Lab room.
-
-8. Upgrade ubuntu and install required packages
+9. Upgrade ubuntu and install required packages
 
    ```bash
    sudo apt update
    sudo apt upgrade
    ```
 
-9. Install XFCE window manager.
+## Lab1.1.2: Install XFCE window manager
 
-   Perform these steps:
+1. This will install a desktop interface like any other computer and
+   is more convenient than the command line interface (CLI)
+
+   Type the following to install the necessary packages:
 
    ```bash
    sudo apt install xfce4 xinit firefox
    ```
 
-   This will help those of you that don't want to make exclusive use
-   of the command line interface (CLI).
-   You will need to connect a mouse to your Pi4.
-   Set it up so that you can start and stop the X-windows interface.
-
-   XFCE is one of several Desktops for X-Windows that is very lightweight
-   (uses a small amount of memory).  It is not as lightweight as LXDE,
-   but is much more user friendly and easy to install.
-   LXDE uses a base of 219 MB RAM, whereas XFCE uses 465 MB RAM.
-   You have a total of 4GB of RAM in your Pi4, so you will want to watch
-   how much memory you use.  If you use too much memory your Pi4 will
-   crash.  A good tool to look at the memory and other resources that
-   you are using is called: htop.
-
-   You can complete the rest of this lab, using the command line,
-   or X-Windows.
-
-7. Connect/setup to eduroam (AND INCLUDE IT in report.pdf)
-
-   To connect to eduroam, you must install the **nmcli** (there may
-   be other options which are OK if you get it working). Notice nmcli
-   is not installed by default. You may need a wired or open wifi (step 5).
+   Then reboot your pi to let the changes take effect. You can
+   unplug your pi and plug back in, or simply type
 
    ```bash
-   sudo apt install network-manager
+   sudo reboot
+   ```
 
-   nmcli con add type wifi con-name "eduroam" \
-      ifname wlan0 ssid "eduroam" wifi-sec.key-mgmt
+   If you are able to login, continue to step 11.
 
-   wpa-eap 802-1x.identity "XXX@ucsc.edu" 802-1x.password \
-      "XXX" 802-1x.system-ca-certs yes \
-      802-1x.eap "peap" 802-1x.phase2-auth mschapv2
-   nmcli connection up eduroam --ask
+   press ctrl + alt + F1, (cmd + alt + F1 for Mac).
+
+2. Along with xfce4, install the following
+   ```
+   sudo apt-get install lightdm
+   sudo apt-get install ubuntu-session
+   ```
+
+When installing lightdm, a pink screen will pop up, Select gdm3 instead of lightdm.
+
+3. Add your user to the "tty" group using this command replacing username with whatever you picked
+   ```
+   sudo usermod -a -G tty username
+   ```
+   The usermod APPENDS the tty GROUP to your user account, giving you permission to access&nbsp;your pi4's ports and virtual terminal sessions._
+
+   If you'd like to learn more about tty click [here](https://www.linusakesson.net/programming/tty/index.php?ref=itsfoss.com)! Basically here its giving us the ability to troubleshoot without the need of a graphical interface._
+
+3. Create the file "Xwrapper.config" using the following command.
+
+   ```
+   sudo vim /etc/X11/Xwrapper.config
+   ```
+
+   /etc is where all app config files are stored_
+
+4. Insert these lines (case sensitive) in the "Xwrapper.config" file:
+
+   ```
+   allowed_users=anybody
+   needs_root_rights=yes
+   ```
+
+   Click [here](https://man.archlinux.org/man/extra/xorg-server/Xwrapper.config.5.en) if you're interested in what these parameters represent._
+
+5. . Create the file "lightdm.conf" using the following command.
+
+   ```
+   sudo vim /etc/lightdm/lightdm.conf
+   ```
+
+6. . Add the following lines in the "lightdm.conf" file (the allow-guest line is optional):
+
+   ```
+   [SeatDefaults]
+   allow-guest=false
+   user-session=xfce
+   ```
+
+7. . Rebooting using the following command should successfully launch the desktop:
+
+   ```
+   sudo reboot
+   ```
+
+11. Connect/setup to eduroam (AND INCLUDE IT in report.pdf)
+
+   Once you're on your desktop, connecting to eduroam is as easy as navigating to the network settings, selecting eduroam as your network, and then signing on using your cruz ID and gold password as you would for any other device.
+
+   If your settings show "No wifi adapter detected" or does not connect for any other reason, locate the white flashdrive containing eduroam.zip and run the install script using the following steps:
+
+1. Install network Manager
+
+   ```
+   sudo apt install network-manager unzip
+   ```
+
+   You'll need unzip package later to unzip eduroam.zip contained in the flash drive.
+
+2. Prior to plugging in usb stick run
+
+   ```
+   lsblk
+   ```
+
+   This will **display details about block devices** so you can tell which one the flash drive is after plugging it in.
+
+3. Plug in the usb stick and run:
+
+   ```
+   lsblk
+   ```
+
+   Identify the new device most likely it'll be **/dev/sda1**
+
+4. Make a directory which the usb will be mounted to and mount it:
+
+   ```
+   mkdir ~/usb_stick
+   sudo mount /dev/sda1 ~/usb_stick
+   ```
+
+   **/dev/sda1** might be different for you
+
+5. Copy the content of the flash drive to you home directory
+
+   ```
+   cp -r  ~/usb_stick/eduroam.zip ~/.
+   or
+   cp -r  ~/usb_stick/eduroam ~/.
+   ```
+
+6. Unmount the flash drive and remove it:
+
+   ```
+   sudo umount /dev/sda1
+   ```
+
+   **/dev/sda1** might be different for you
+
+7. unzip eduroam.zip and run the eduroam/setup.sh
+
+   ```
+   unzip eduroam.zip
+   cd ~/eduroam
+   sudo ./setup.sh
+   ```
+
+   You might need to chmod +x the script.
+
+8. Input your Gold password info when prompted, and you should be connected. Remove you're ethernet and try pinging google.
+
+   ```
+   email: blank@ucsc.edu
+   username: blank@ucsc.edu
+   password: [Gold password]
    ```
 
 ## Lab1.2: Run hello world in ESP32 (5 points)
