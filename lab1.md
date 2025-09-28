@@ -2,16 +2,25 @@
 
 Due Date: Friday 10/10/2025
 
-This lab is worth 20 Points. Project check-off takes
-place during the TA section.
-
 The overall objective of this lab is to setup the Pi4 (lab1.1),
-and program a couple of simple ESP32 programs using the Pi4 board
-(lab1.2 and lab1.3). This requires having a WIFI setup (eduroam works)
-in the Pi4.
+and program two simple ESP32 programs using the Pi4 board
+(lab1.2 and lab1.3). This requires having a WIFI setup (see step 8).
 
-It is VERY important to submit the report.pdf.
-If this file is missing, you lose 1/2 of the points.
+This lab is worth 20 points in total, and is complete when checked-off in lab.
+Please ensure your report is uploaded to Lab 1 Report on Gradescope before check-off.
+You may demo after the deadline as long as the code is submitted on time.
+
+### What to include in your lab report
+1. Screenshot of eduroam connection.
+2. How you solved the lab, and difficulties you overcame.
+3. Description of AI usage with full chat log.
+
+Please submit your report.pdf to the Lab 1 Report Assignment on Gradescope before your demo.
+
+### Resources
+
+- [Lab 1.2 Example Code](**https://github.com/espressif/esp-idf/blob/master/examples/get-started/hello_world/main/hello_world_main.c**)
+- [ESP32-c3 RUST Board Datasheet](**https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf**)
 
 ## Lab1.0: Acquire CSE121 Kit (0 points)
 
@@ -25,93 +34,100 @@ Lab1.1 requires you to assemble the components leading to getting
 a working Pi4 module and case, functioning with eduroam WiFi and
 and linux.
 
-The installation should be based on an **ubuntu server**
-(not the Pi4 default).    This can be sufficient to complete
-the lab.  We will also install X-Windows an XFACE desktop
-which adds extra user friendly functionality.
+The installation should be based on **ubuntu server**
+(not the Pi4 default). This distribution is light weight,
+meaning you'll have more RAM. We will also install X-Windows: a
+FACE desktop which adds extra user friendly functionality.
 
-1. Place the Pi4 into its case. Ground yourself when
-   handling this card so as to avoid possible failure due
-   to static electricity.  The Pi4 is the most expensive
-   card in your kit, the case will protect the device.
-   Protecting electronics against static electricity is always
-   a good idea.  Note that this is a very nice case.
-   The Pi4's CPU will be in contact with a thermal contact
-   which eliminates the need for a fan.
-
-2. Install a the Pi Imager software into a host computer, so
-   that we can flash the Operating System into the Pi4 microSD.
+1. Place the Pi4 into its case, and avoid removing it,
+   as it protects the expensive board from static electricity.
+   <br>
+2. Install the Pi Imager software onto your personal computer, so
+   we can flash the Operating System onto the Pi4 microSD.
    Details for downloading Pi Imager for various computer
    platforms (Mac, Windows or Linux) can be found here:
       <https://www.raspberrypi.com/software/>
-
-3. In order to flash the microSD insert it into the CanaKit
-   "USB MicroSD Card Reader" device.
-
-4. Download the UBUNTU 64-bit server image (not the default one)
-   (<https://ubuntu.com/download/raspberry-pi>)
-
-5. Insert MicroSD Card Reader into a USB Port in the computer.
-   Start the raspberry-pi imager in order to Flash the microSD
-   BEWARE!! Be very careful that you choose the right destination
-   (e.g. the correct 128GB USB based storage) and not any other
-   drive in your computer, or you will be EXTREMELY sorry you
-   did not heed  this advice!  Click on the gear and do your best
-   with the settings for installing the software.
-
-5. Extract the microSD from the USB MicroSD Card Reader and
-   insert it back into the Pi4 box microSD slot.
-   Connect cables for keyboard, monitor, and mouse.
-   Power on the device, and allow it to boot. Then type this
-   to login (unless you changed user name and passwd in the settings):
+   <br>
+3. Remove the MicroSD card from the PI4 and insert it into your
+   personal computer. If you do not have an adapter, they are
+   provided in the red bin in lab.
+   <br>
+4. Within the imager software (step 2):
+   - Under "Raspberry Pi Device" select "Raspberry PI 4"
+   - Under "Operating System" select "Other general-purpose OS",
+       then select Ubuntu, and finally Ubuntu Server 24.04.3 LTS (64-bit)
+   <br>
+5. Ensure that your MicroSD card is selected under "Storage".
+   The easiest way to confirm is removing it and seeing if it disappears.
+   <br>
+6. The Imager will prompt you to apply OS customization settings, you can
+   type in the local wifi SSID and password in here for convenience sake.
+   
+   Finally click Yes to erase all existing data on the USB Device and wait
+   for the process to complete.
+   <br>
+7. Extract the microSD from the USB MicroSD Card Reader and
+   insert it back into the Pi4 box MicroSD slot. Make the following connections:
+   - Keyboard into a USB slot.
+   - Display to the PI4 via the HDMI cord using the HDMI 0 slot.
+   - AC Adapter into the Canakit PISwitch
+   - CanaKit PISwitch into the USB-C port on the PI4.
+  
+   This will power on the device, and after a few moments, you can
+   login using the default username and password:
 
    ```
    login: ubuntu
    password: ubuntu
    ```
+   It will then prompt you to set a new password, choose something memorable!
+   <br>
 
-   NOTE: if you might also be able a serial port to connect to the
-   PI4 UART and a terminal for this part of the setup,
-   but we reccommend use of a monitor with an HDMI interface.
+8.  Setup Wifi
 
-6. If you do an `ls` and find that some colors are unreadable, such
-   as for directories, you may want to add a file in your home
-   direcory called .dircolors with an entry such as:
+   Test if the SSID and password you input in custom OS Settings provides internet
+   access by typing
 
    ```bash
-   DIR 01;36 # teal color for directories
+   ping google.com
    ```
+   If you see data being retrieved, you can cancel the operation and move onto step 9.
 
-   After you start a new shell you might see color changes when you
-   do `ls`.  If you want to change other colors, read more about
-   LSCOLORS and dircolors.
-
-7. Setup Wifi
-
-   This is a bit trickier because the default ubuntu server does
-   not install the required commands to run eduroam.
-
-   Therefore you must either (option 1) connect to the ethernet port
-   OR (option 2) use a non-eduroam way to connect with WiFi.
-
-   Option 2: (not using school eduroam, but home wireless) See:
+   Otherwise you must manually set the SSID and password until a successful connection.
+   See the following resource:
    > <https://linuxconfig.org/ubuntu-20-04-connect-to-wifi-from-command-line>
 
-   Option 3: Use an ethernet cable connected to your router at home or
-   configure the Pi4 to use your own WiFi.
-
-   Option 4: Use a phone hotspot.
-
-   You will need Eudoroam to access the Internet in our Lab room.
-
-8. Upgrade ubuntu and install required packages
+   To do so, open the following file like so:
+   ```bash
+   sudo nano /etc/netplan/50-cloud-init.yaml
+   ```
+   Confirm that the file is formatted like so, with no tabs, and each indentation being two spaces.
+   ```bash
+   network:
+     version: 2
+     wifis:
+       wlan0:
+         optional: true
+         access-points:
+             "SSID-NAME-HERE":
+               password: "PASSWORD-HERE"
+         dhcp4: true
+   ```
+   Next type the following to apply your changes:
+   ```bash
+   sudo netplan apply
+   ```
+   Test your connection by pinging google once more.
+   If not, double check for typos or ask a TA for guidance.
+   <br>
+9. Upgrade ubuntu and install the required packages by typing these two commands.
 
    ```bash
    sudo apt update
    sudo apt upgrade
    ```
-
-9. Install XFCE window manager.
+   <br>
+10. Install XFCE window manager.
 
    Perform these steps:
 
@@ -130,29 +146,18 @@ which adds extra user friendly functionality.
    LXDE uses a base of 219 MB RAM, whereas XFCE uses 465 MB RAM.
    You have a total of 4GB of RAM in your Pi4, so you will want to watch
    how much memory you use.  If you use too much memory your Pi4 will
-   crash.  A good tool to look at the memory and other resources that
+   crash. A good tool to look at the memory and other resources that
    you are using is called: htop.
 
    You can complete the rest of this lab, using the command line,
    or X-Windows.
 
-7. Connect/setup to eduroam (AND INCLUDE IT in report.pdf)
+   <br>
+11. Connect/setup to eduroam (AND INCLUDE IT in report.pdf)
 
-   To connect to eduroam, you must install the **nmcli** (there may
-   be other options which are OK if you get it working). Notice nmcli
-   is not installed by default. You may need a wired or open wifi (step 5).
-
-   ```bash
-   sudo apt install network-manager
-
-   nmcli con add type wifi con-name "eduroam" \
-      ifname wlan0 ssid "eduroam" wifi-sec.key-mgmt
-
-   wpa-eap 802-1x.identity "XXX@ucsc.edu" 802-1x.password \
-      "XXX" 802-1x.system-ca-certs yes \
-      802-1x.eap "peap" 802-1x.phase2-auth mschapv2
-   nmcli connection up eduroam --ask
-   ```
+   Once you've installed the XFCE4 window manager, boot into the desktop and you
+   can connect to eduroam through the Wifi Manager GUI. Include a screenshot of
+   this in your lab report.
 
 ## Lab1.2: Run hello world in ESP32 (5 points)
 
@@ -183,16 +188,6 @@ which adds extra user friendly functionality.
    ./install.sh esp32c3
    ```
 
-   WARNING: This is a TOP OF THE TREE checkout. What this means is
-   that the day that you clone the repo, it may (or not) have a BUG
-   and thus it may not work. (top of the tree implies that is the
-   latest entry in the git repository tree).
-
-   If you end up have difficulties with this or any other parts of this
-   lab, you should include this in your report.pdf along with all the
-   gorie details.  This code has been known to be quite reliable under
-   Linux, which is what we are using the Pi4.
-
 3. Get simple hello_world running
 
    ```bash
@@ -207,7 +202,7 @@ which adds extra user friendly functionality.
    "Minimum free heap..." it prints your name. E.g:
 
    ```c
-   printf("Perico Los Palotes\n"); // Substitute your name
+   printf("Your Name Here\n"); // Substitute your name
    ```
 
    ```bash
