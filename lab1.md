@@ -231,7 +231,7 @@ that flashes the LED on/off once per second.
 
 The app_main should call something like this:
 
-```
+```c
 xTaskCreate(blink_task, "blink_task", 2048, NULL, 5, NULL);
 ```
 
