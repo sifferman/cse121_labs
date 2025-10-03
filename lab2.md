@@ -12,36 +12,22 @@ file is missing, you lose 1⁄2 of the points.
 
 ## Lab2.1: print value with GDB (10 points)
 
-This repo has a "lab2/lab2_debug.elf" file. You
-should convert it to a .bin, then upload it to the ESP32 board, then run GDB with it.
+This repo has a "lab2/lab2_debug.elf" file. In order to inspect the contents the elf, we will need to convert to a binary format (.bin):
+```bash
+esptool.py --chip esp32c3 elf2image <lab2_image.elf>
+```
+Then flash this file to the esp32c3:
+```bash
+esptool.py --chip esp32c3 write_flash 0x10000 <lab2_image.bin>
+```
 
-You can see the full dissasembly of "lab2/lab2_debug.elf" with the following command:
+Optionally, you can see the full dissasembly of "lab2/lab2_debug.elf" with the following command:
 
 ```bash
 riscv32-esp-elf-objdump -D lab2/lab2_image.elf > lab2_image.S
 ```
 
-Some things that you will need to "figure out".
-
-* How can I upload an image obtained from someone else (where I do not have the
-  source code)? You will not be able to compile it from the source. There are many
-  ways to do this.
-
-* How can I use gdb against a binary/image
-
-* The code was compiled without debug info, so you have to look at the assembly
-  code.  If you forgot the RISC-V function call convention, the following
-  document explains it: <https://riscv.org/wp-content/uploads/2015/01/riscv-calling.pdf>
-
-One word of caution.   Beware with how of the use of idf.py flash since this
-command not only tries to flash your program, it also tries to build a new
-lab2_debug.elf for you, potentially wiping out your previous one.
-
-What you have to do is to demonstrate during check-off time in the lab that you
-are able to run gdb so as to obtain what the values passed to the `compute`
-function (there are 3 values passed to this function, and one value returned).
-You will also have to show the entry point address of the `compute` function, and
-the address of the instruction within that function that returns a value.
+To demo the first part of lab 2, you'll first flash the board with this bin. Next open the board to be accessed by GDB. Then using GDB, figure out where the `compute` function is called (entry point address), and what values are being input and output(there are 3 values passed to this function, and one value returned).
 
 When the binary runs, it prints something like this (XXX value may change
 depending on your board):
@@ -53,31 +39,35 @@ result of compute is XXX
 result of compute is XXX
 ```
 
-If the GDB is "unstable". You may need to plug/unplug the board if you see
-openocd errors like this:
-
-```
-Error: Connect failed. Consider setting up a gdb-attach
-```
-
-Or this:
-
-```
-Error: failed read at 0x11, status=2
-Error: extra data from bitq interface
-```
-
 To help you a bit, prior to using gdb and flashing your program you will have
 to enable the openocd protocol with the command:
 
 ```bash
-idf.py openocd
+idf.py openocd -f board/esp32c3-builtin.cfg
 ```
 
+*If you receive this error, perform the following steps.*
+```
+Error: [esp32c3] Unsupported DTM version: -1
+Error: [esp32c3] Could not identify target type.
+```
+a. Identify which port the board is connected to by typing
+```
+lsusb
+```
+b. Provide yourself the correct permissions by typing the following, replacing X with the bus number next to expressif in part a, and Y being the port.
+```
+sudo chmod 666 /dev/bus/usb/00X/00Y
+```
+
+
 This command installs a client/server interface which allows gdb to communicate
-with the board suing the openocd and JTAG protocols via the USB port.  To help
-make this happen I used this gdbinit file which supplies gdb commands at start
-up (others are possible too):
+with the board suing the openocd and JTAG protocols via the USB port. To ensure proper configuration, in your project folder, create a new file named gdbinit.
+
+```bash
+vim gdbinit
+```
+With the contents of the file as:
 
 ```gdb
 target remote :3333
@@ -91,14 +81,12 @@ c
 To start gdb using this gdbinit you run this command:
 
 ```bash
-riscv32-esp-elf-gdb -x gdbinit lab2/lab2_image.elf
+riscv32-esp-elf-gdb -x gdbinit lab2_image.elf
 ```
 
-Note that this cross-compiled gdb is quite finicky.  You may need to run mon
-reset halt numerous times to restart the program (don't use the reset buttong
-for this purpose); you may also need to use Ctrl-C, and/or unplug and plug the
-rust board numerous times, and sometimes you may even need to restart your
-computer.
+If GDB stalls and openocd crashes with a message like "software core reset", open gdbinit, and remove the line "mon reset halt". 
+
+Ignore when the next step asks you to type this into gdb.
 
 You will need to learn a few gdb commands. For this lab, this guide will be
 more than enough for degugging assembly language with gdb:
@@ -108,12 +96,15 @@ more than enough for degugging assembly language with gdb:
 Gdb also has an excellent help system.
 
 The answer should be written in the report.pdf. It should be something like:
-(note these values are wrong). Explain from how you got the answer (justify the
-answer, do not just write the correct value).  You will need to be able to show
-how the 3 parameters are passed to the `compute` function, and how its value
-gets returned, and how you got the address of the requested items.
+(note these values are wrong).
 
+1. Explain from how you got the answer (justify the
+answer, do not just write the correct value).
+2. Show how the 3 parameters are passed to the `compute` function, and how its value
+gets returned.
+3. Show how you got the address of the requested items.
 
+Example:
 ```
 Lab2.1
     Compute 1st argument is 502 and is passed via register ?
@@ -123,16 +114,11 @@ Lab2.1
     The entry point of the "compute" function is at address 0x????????
 ```
 
-Some suggestions to get GDB working:
+Some suggestions to get navigate GDB:
 
-* Get a simple hello world working with GDB and openocd
-  * You will see that you need to hit reset and/or flash a few times to work
-* Then, overwrite the binary with the class ELF.
-  * build and flash again
-* The breakpoint command "b app_main", may not work with the new binary (different address maps)
-  * Check the address location (riscv32-esp-elf-objdump -S binary.elf should help)
-  * Create binary address checkpoint like b *0x4200bbcc" (or the correct address)
-* Run usual gdb command and check the register values before starting to execute `compute`
+* Check the address location (riscv32-esp-elf-objdump -S binary.elf should help).
+* Create binary address checkpoint like b *0x4200bbcc" (or the correct address).
+* Run usual gdb command and check the register values before starting to execute `compute`.
 
 ## Lab2.2: humidity and temperature (10 points)
 
