@@ -43,7 +43,7 @@ To help you a bit, prior to using gdb and flashing your program you will have
 to enable the openocd protocol with the command:
 
 ```bash
-idf.py openocd -f board/esp32c3-builtin.cfg
+openocd -f board/esp32c3-builtin.cfg
 ```
 
 *If you receive this error, perform the following steps.*
@@ -109,7 +109,6 @@ Example:
 Lab2.1
     Compute 1st argument is 502 and is passed via register ?
     Compute 2nd argument is 303 and is passed via register ?
-    Compute 3rd argument is 404 and is passed via register ?
     Return value is 99 and is returned via register ?
     The entry point of the "compute" function is at address 0x????????
 ```
