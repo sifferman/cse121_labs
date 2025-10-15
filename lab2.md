@@ -14,11 +14,11 @@ file is missing, you lose 1⁄2 of the points.
 
 This repo has a "lab2/lab2_debug.elf" file. In order to inspect the contents the elf, we will need to convert to a binary format (.bin):
 ```bash
-esptool.py --chip esp32c3 elf2image <lab2_image.elf>
+esptool --chip esp32c3 elf2image <lab2_image.elf>
 ```
 Then flash this file to the esp32c3:
 ```bash
-esptool.py --chip esp32c3 write_flash 0x10000 <lab2_image.bin>
+esptool --chip esp32c3 write-flash 0x10000 <lab2_image.bin>
 ```
 
 Optionally, you can see the full dissasembly of "lab2/lab2_debug.elf" with the following command:
