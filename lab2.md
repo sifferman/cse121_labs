@@ -7,9 +7,6 @@ the lab has been submitted to Gradescope during a future scheduled TA section. T
 overall objective of this lab is to use GDB and interface with a RISC-V
 executable, and to implement a humidity/temperature sensor.
 
-It is VERY important to submit the **report.pdf** file. If this
-file is missing, you lose 1⁄2 of the points.
-
 ## Lab2.1: print value with GDB (10 points)
 
 This repo has a "lab2/lab2_debug.elf" file. In order to inspect the contents the elf, we will need to convert to a binary format (.bin):
@@ -84,7 +81,7 @@ To start gdb using this gdbinit you run this command:
 riscv32-esp-elf-gdb -x gdbinit lab2_image.elf
 ```
 
-If GDB stalls and openocd crashes with a message like "software core reset", open gdbinit, and remove the line "mon reset halt". 
+If GDB stalls and openocd crashes with a message like "software core reset", open gdbinit, and remove the line "mon reset halt".
 
 Ignore when the next step asks you to type this into gdb.
 

@@ -7,9 +7,6 @@ ICM-42670-P on the RUST ESP32C3 board as a Bluetooth mouse.  Each time the
 board tilts, it should move the mouse in the X/Y direction accordingly. There
 are some specific rules on how to control the mouse and the test to pass.
 
-It is VERY important to submit the **report.pdf**. If this file is missing, you
-lose 1⁄2 of the points.
-
 ## Lab4.1: Board movement (5 points)
 
 Write a program to print in the terminal (must use ESP_LOGI) the UP/DOWN or

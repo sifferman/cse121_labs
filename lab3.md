@@ -6,9 +6,6 @@ This lab is worth 20 Points. The overall objective of this task is to develop a
 new C++ library in ESP32 to control the display (I2C) and use the same I2C to
 access the temperature/humidity sensor.
 
-It is VERY important to submit the **report.pdf** file. If this
-file is missing, you lose 1⁄2 of the points.
-
 ## Lab3.1: Solder pins (5 points)
 
 You must solder the pin headers to the ESP32 board. This for the I2C and Vdd
